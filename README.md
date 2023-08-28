@@ -45,18 +45,27 @@ To get started with MADBlog, follow these steps:
 $ git clone https://github.com/Kalyanasundaram-J/MAD-BLOG.git
 $ cd MAD-BLOG
 ```
+2. Environment Variables
+In this project, we use environment variables to manage configuration settings and sensitive information. To get started, follow these steps:
+  1. **Create a `.env` File:**
+  In the root directory of your project, create a file named `.env`. This file will contain your environment variables
+  2. **Define Environment Variables:**
+  Open the `.env` file and define your variables in the format `KEY=VALUE`. Copy the content from .env.example
 
-2. Install dependencies:
+
+3. Install dependencies:
 ```bash
 $ npm install
 ```
 
-3. Initialize the project:
+4. Initialize the project:
 ```bash
 $ npm run dev
 ```
-4. Need to setup the <strong>mongo DB</strong> and assign the url for DB in the index.js file.
-4. Open your web browser and navigate to http://localhost:8080 to access the application.
+
+5. Need to setup the <strong>mongo DB</strong> and assign the url for DB in the index.js file.
+
+6. Open your web browser and navigate to http://localhost:8080 to access the application.
 
 ## Usage
 1. Sign Up:
