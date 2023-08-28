@@ -91,9 +91,9 @@ We welcome contributions from the community! To contribute to MADBlog:
 5. Create a pull request.
 
 ## Tech Stack
-![Node.js](https://avatars.githubusercontent.com/u/18269663?v=4)
+<img src="https://avatars.githubusercontent.com/u/18269663?v=4" alt="Node.js" width="64" height="64">
 <strong>Express.js</strong>
-![Mongo DB](https://webimages.mongodb.com/_com_assets/cms/kuyjf3vea2hg34taa-horizontal_default_slate_blue.svg?auto=format%252Ccompress)
+<img src="https://webimages.mongodb.com/_com_assets/cms/kuyjf3vea2hg34taa-horizontal_default_slate_blue.svg?auto=format%252Ccompress" alt="Mongo DB" width="64" height="64">
 
 ## License
 This project is Not licensed.

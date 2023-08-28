@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
-const SEC_KEY = "$sec256@key";
+const SEC_KEY = process.env.JWT_SEC_KEY;
 
 async function generateTokenForUser(id) {
     try{

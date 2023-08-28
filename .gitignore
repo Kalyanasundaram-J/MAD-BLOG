@@ -17,6 +17,7 @@ dist/
 # Ignore sensitive or configuration files
 secrets.json
 config.ini
+.env
 
 # Ignore operating system files
 .DS_Store
