@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partier/css/bootstrap.ejs') %>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Blog</title>
+  </head>
+
+  <body>
+    <%- include('./components/naveBar.ejs') %>
+    <div class="container mt-4">
+      <% if (blogs?.length) { %>
+      <div class="row">
+        <div class="col-12 text-end mb-2">
+          <a class="btn btn-outline-primary rounded" href="/blog/create"
+            ><strong>+</strong> Create Blog</a
+          >
+        </div>
+      </div>
+      <div class="row">
+        <% blogs.forEach(blog=> { %>
+        <div class="col-12">
+          <div class="card border border-secondary rounded mb-3">
+            <div class="row g-0 justify-content-center align-items-center">
+              <div class="col-auto m-2">
+                <img
+                  src="/uploads/<%= blog.coverImage %>"
+                  class="img-fluid rounded"
+                  alt="Cover Image"
+                  loading="lazy"
+                  style="width: 100px; height: 100px"
+                />
+              </div>
+              <div class="col">
+                <div class="card-body">
+                  <h5 class="card-title"><%= blog.title %></h5>
+                  <p class="card-text">
+                    <small class="text-body-secondary">
+                      <%= new Date(blog.createdAt).toLocaleDateString('en-GB')
+                      %>
+                    </small>
+                  </p>
+                </div>
+              </div>
+              <div class="col-auto text-center my-auto mx-2 pb-2">
+                <a
+                  class="btn btn-primary btn-sm rounded me-1"
+                  href="/blog/edit/<%= blog._id %>"
+                  >Edit</a
+                >
+                <a
+                  class="btn btn-outline-danger btn-sm rounded"
+                  href="/blog/delete/<%= blog._id %>"
+                  >Delete</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <% } else { %>
+      <div class="row vh-100">
+        <div class="col-12 text-center">
+          <h4>Create Your First Blog</h4>
+          <a class="btn btn-outline-primary btn-sm" href="/blog/create"
+            >Create Blog</a
+          >
+        </div>
+      </div>
+      <% } %>
+    </div>
+    <%- include('./partier/js/bootstrap.ejs') %>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partier/css/bootstrap.ejs') %>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog</title>
+  </head>
+  <body>
+    <%- include('./components/naveBar.ejs') %>
+    <div class="container my-4">
+      <div class="card h-100 p-2">
+        <img
+          src="/uploads/<%= blog.coverImage %>"
+          alt="blog image"
+          class="card-img-top rounded w-50 m-auto"
+          height="400px"
+        />
+        <div class="card-body">
+          <h5 class="card-title text-center mb-4"><%= blog.title %></h5>
+          <p class="card-text"><%= blog.description %></p>
+          <p class="card-text">
+            <small class="text-body-secondary float-start">
+              <%= blog.createdBy.fullName %>
+            </small>
+            <small class="text-body-secondary float-end">
+              <%= new Date(blog.createdAt).toLocaleDateString('en-GB') %>
+            </small>
+          </p>
+        </div>
+      </div>
+    </div>
+    <%- include('./partier/js/bootstrap.ejs') %>
+  </body>
+</html>

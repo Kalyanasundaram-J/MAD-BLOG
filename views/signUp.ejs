@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partier/css/bootstrap.ejs') %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+<body>
+    <%- include('./components/naveBar.ejs') %>
+    <div class="container align-items-center mt-2 border border-primary rounded p-4">
+        <h2 class="text-center">Sign Up</h2>
+        <form method="post" action="/user/signup" >
+            <div class="mb-3">
+                <label for="Fullname" class="form-label">Full Name</label>
+                <input type="taxt" class="form-control border border-primary rounded" name="fullName" id="Fullname" aria-describedby="Full name of the user" minlength="2" required>
+            </div>
+            <div class="mb-3">
+              <label for="inputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control border border-primary rounded" name="email" id="InputEmail1" aria-describedby="email address input" required>
+            </div>
+            <div class="mb-3">
+              <label for="inputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control border border-primary rounded" name="password" id="inputPassword1" required aria-d>
+              <div id="passwordInst"></div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" id="submitButton">Sign Up</button>
+            </div>
+        </form>
+    </div>
+    <%- include('./partier/js/bootstrap.ejs') %>
+    <script>
+        const fullNameInput = document.getElementById("Fullname");
+        const emailInput = document.getElementById("InputEmail1");
+        const passwordInput = document.getElementById("inputPassword1")
+        const passwordInstruction = document.getElementById("passwordInst")
+        passwordInput.addEventListener("change",()=>{
+            if(!isValidPassword(passwordInput.value)) {
+                passwordInstruction.innerHTML = `<h6>Create a Strong Password:</h6>
+                <p>Your password must meet the following criteria:</p>
+                <ol>
+                <li>Length: 8 to 16 characters</li>
+                <li>At least one uppercase letter (A-Z)</li>
+                <li>At least one lowercase letter (a-z)</li>
+                <li>At least one digit (0-9)</li>
+                <li>At least one special character: @ # $ % ^ & + = !</li>
+                </ol>
+                <p>Avoid common words, names, and patterns.</p>`
+                alertBox("Password should be valid.",'warning')
+            }
+            else{
+                validateButtonVisibility()
+            }
+        })
+        emailInput.addEventListener("change",()=>{
+            if(!isValidEmail(emailInput.value)) {
+                alertBox("Email Id should be valid.",'warning')
+            }
+            else {
+                validateButtonVisibility()
+            }
+        })
+        function isValidEmail(text) {
+            const emailRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            return emailRegExp.test(text);
+        }
+        function isValidPassword(text) {
+            const passwordRegx = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=!])(?!.*\s).{8,16}$/;
+            return passwordRegx.test(text);
+        }
+        function validateButtonVisibility() {
+            if(!fullNameInput || !emailInput || !passwordInput) {
+                return false;
+            }
+            else {return true;}
+        }
+    </script>
+</body>
+</html>

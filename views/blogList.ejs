@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partier/css/bootstrap.ejs') %>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Blog List Admin</title>
+</head>
+
+<body>
+    <%- include('./components/naveBar.ejs') %>
+        <div class="container mt-4">
+            <% if (blogs?.length) { %>
+                <div class="row">
+                    <div class="col-12 text-center mb-2">
+                        <h4>Blog List ( Admin )</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <% blogs.forEach(blog=> { %>
+                        <div class="col-12">
+                            <div class="card border border-secondary rounded mb-1">
+                                <div class="row g-0 justify-content-center align-items-center">
+                                    <div class="col-auto m-2">
+                                        <img src="/uploads/<%= blog.coverImage %>" class="img-fluid rounded"
+                                            alt="Cover Image" loading="lazy" style="width: 50px; height: 50px" />
+                                    </div>
+                                    <div class="col">
+                                        <div class="card-body py-0">
+                                            <h6 class="card-title">
+                                                <%= blog.title %>
+                                            </h6>
+                                            <p class="card-text">
+                                                <small class="text-body-secondary">
+                                                    <%= blog.createdBy.fullName %>
+                                                </small>
+                                                <small class="text-body-secondary float-end">
+                                                    <%= new Date(blog.createdAt).toLocaleDateString('en-GB') %>
+                                                </small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto text-center my-auto mx-2 pb-2">
+                                        <a class="btn btn-outline-danger btn-sm rounded"
+                                            href="/admin/delete/<%= blog._id %>">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+                <% } else { %>
+                    <div class="row vh-100">
+                        <div class="col-12 text-center">
+                            <h4>Create Your First Blog</h4>
+                            <a class="btn btn-outline-primary btn-sm" href="/blog/create">Create Blog</a>
+                        </div>
+                    </div>
+                    <% } %>
+        </div>
+        <%- include('./partier/js/bootstrap.ejs') %>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partier/css/bootstrap.ejs') %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <% if (editBlog) { %>
+            Edit 
+        <% } else { %>
+            Create 
+        <% } %>
+         Blog
+    </title>
+</head>
+<body>
+    <%- include('./components/naveBar.ejs') %>
+    <div class="container align-items-center mt-2 border border-primary rounded p-4">
+        <h2 class="text-center">
+            <% if (editBlog) { %>
+                Edit 
+            <% } else { %>
+                Create 
+            <% } %>
+             Blog
+        </h2>
+        <% if (editBlog) { %>
+            <form method="post" action="/blog/update/<%= blog._id %>" enctype="multipart/form-data">
+        <% } else { %>
+            <form method="post" action="/blog/create" enctype="multipart/form-data">
+        <% } %>
+            <div class="mb-3">
+                <label for="coverImage" class="form-label">Cover Image</label>
+                <% if (editBlog && blog.coverImage) { %>
+                    <img src="/uploads/<%= blog.coverImage %>" alt="Cover Image" class="img-fluid ms-4" width="150px" />
+                    <button type="button" class="btn btn-outline-danger btn-sm rounded ms-2" data-bs-toggle="modal" data-bs-target="#removeCoverImageModal">
+                        Remove
+                    </button>
+                <% } else { %>
+                    <input type="file" class="form-control" name="coverImage" id="coverImage" aria-describedby="cover Image of blog">
+                <% } %>
+            </div>
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control border border-primary rounded" name="title" value="<%= blog?.title %>" id="title" aria-describedby="title of blog" required>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea class="form-control border border-primary rounded" name="description" id="description" required><%= blog?.description %></textarea>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">
+                    <% if (editBlog) { %>
+                        Save
+                    <% } else { %>
+                        Create
+                    <% } %>
+                </button>
+            </div>
+        </form>
+        <% if (editBlog && blog.coverImage) { %>
+        <div class="modal fade" id="removeCoverImageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="removeCoverImageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="removeCoverImageModalLabel">Remove cover image</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  This action will remove the cover image perminently!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form method="post" action="/blog/rci/<%= blog._id %>" enctype="multipart/form-data">
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+                </div>
+              </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <%- include('./partier/js/bootstrap.ejs') %>
+</body>
+</html>

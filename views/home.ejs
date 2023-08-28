@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partier/css/bootstrap.ejs') %>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+  </head>
+  <body>
+    <%- include('./components/naveBar.ejs') %>
+    <div class="container mt-4">
+      <div class="row">
+        <% if (blogs.length) { %> <% blogs.forEach(blog => { %>
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+          <a
+            class="card btn btn-primary h-100"
+            href="/blog/view/<%= blog._id %>"
+          >
+            <img
+              src="/uploads/<%= blog.coverImage %>"
+              alt="blog image"
+              class="card-img-top rounded h-30"
+              height="250px"
+              loading="lazy"
+            />
+            <div class="card-body">
+              <h5 class="card-title"><%= blog.title %></h5>
+            </div>
+            <p class="card-text mb-2">
+              <small class="text-body-secondary float-start"
+                ><%= blog.createdBy.fullName %></small
+              ><small class="text-body-secondary float-end"
+                ><%= new Date(blog.createdAt).toLocaleDateString('en-GB')
+                %></small
+              >
+            </p>
+          </a>
+        </div>
+        <% }) %> <% } else { %>
+        <div class="col-12 text-center">
+          <h1>Create your first blog</h1>
+        </div>
+        <% } %>
+      </div>
+    </div>
+    <%- include('./partier/js/bootstrap.ejs') %>
+  </body>
+</html>
